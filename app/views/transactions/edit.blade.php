@@ -1,0 +1,1 @@
+/var/www/laravel/app/views/transactions/edit.blade.php

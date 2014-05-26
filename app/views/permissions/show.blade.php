@@ -1,0 +1,1 @@
+/var/www/laravel/app/views/permissions/show.blade.php
