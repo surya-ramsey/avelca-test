@@ -11,7 +11,7 @@
         </li>
         <li>
             {{ Form::label('password', 'Password:') }}
-            {{ Form::text('password') }}
+            {{ Form::password('password') }}
         </li>
         <li>
             {{ Form::label('permission', 'Permission:') }}
