@@ -11,8 +11,9 @@
 |
 */
 
-Route::get('/',function(){
-	return View::make('hello');
+Route::get('/', function()
+{
+    return Redirect::to('users');
 });
 
 Route::resource('users','UsersController');
@@ -26,7 +27,7 @@ Route::resource('transactions','TransactionsController');
 Route::resource('types','TypesController');
 Route::resource('usergroups','UserGroupsController');
 
-Route::get('/', array('as' => 'home', function () { }));
+//Route::get('/', array('as' => 'home', function () { }));
 Route::get('login', array('as' => 'login', function () { }));
 Route::post('login', function () { });
 Route::get('logout', array('as' => 'logout', function () { }));
