@@ -20,7 +20,9 @@ class UserGroupsController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('user_groups.create');
+
+		$groups = DB::table('groups')->orderBy('name','asc')->lists('name','id');
+		return View::make('user_groups.create', array('group_options'=>$groups));
 	}
 
 	/**
@@ -37,7 +39,7 @@ class UserGroupsController extends \BaseController {
 		$data = Input::all();
 		UserGroup::create($data);
 
-		return Redirect::route('usergroups.index');
+		return Redirect::route('usergroups.index')->with('success','Data User Group has been saved');
 	}
 
 	/**
@@ -47,10 +49,7 @@ class UserGroupsController extends \BaseController {
 	 * @return Response
 	 */
 	public function show($id)
-	{
-		$usergroup = Usergroup::findOrFail($id);
-
-		return View::make('user_groups.show', compact('usergroup'));
+	{		
 	}
 
 	/**
@@ -61,9 +60,9 @@ class UserGroupsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$usergroup = Usergroup::find($id);
-
-		return View::make('user_groups.edit', compact('usergroup'));
+		$usergroup = UserGroup::find($id);
+		$group_options = DB::table('groups')->orderBy('name','asc')->lists('name','id');
+		return View::make('user_groups.edit', compact('usergroup','group_options'));
 	}
 
 	/**
@@ -76,9 +75,6 @@ class UserGroupsController extends \BaseController {
 	{
 		$usergroup = Usergroup::findOrFail($id);
 
-		//$validator = Validator::make($data = Input::all(), Usergroup::$rules);
-
-		//if ($validator->fails())	{return Redirect::back()->withErrors($validator)->withInput();	}
 		$data = Input::all();
 		$usergroup->update($data);
 
@@ -96,6 +92,23 @@ class UserGroupsController extends \BaseController {
 		Usergroup::destroy($id);
 
 		return Redirect::route('user_groups.index');
+	}
+
+	public function getuseremail($term){		
+		$suggestion = User::where('email','LIKE','%'.$term.'%');
+		return Response::json($suggestion);
+	}
+
+	public function senduser(){
+		$term = Input::get('term');
+		$users = array();
+		$search = User::where('email','LIKE','%'.$term.'%')->get();
+
+		foreach ($search as $results => $user) {
+			$users[]=array('id'=>$user->id,
+							'email'=>$user->email);
+		}
+		return Response::json($users);
 	}
 
 }

@@ -2,3 +2,9 @@
 	padding-right: 2px;
 	margin-right: -3px;
 }
+
+.suggest{
+	position: absolute;
+	background-color: lightblue;
+	z-index: 100;
+}

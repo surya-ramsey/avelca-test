@@ -6,6 +6,12 @@
 
 <p>{{ link_to_route('usergroups.create', 'Add new user group') }}</p>
 
+@if(Session::has('success'))
+    <div class="alert alert-success">
+        {{Session::get('success')}}
+    </div>
+@endif
+
 @if ($usergroups->count())
     <table class="table table-striped table-bordered">
         
@@ -25,7 +31,7 @@
             @foreach ($usergroups as $usergroup)
                 <tr>
                       <td>{{ $usergroup->id }}</td>
-			          <td>{{ link_to_route('usergroups.show', $usergroup->user->email , array($usergroup->id)) }}</td>
+			          <td>{{ $usergroup->user->email }}</td>
 			          <td>{{ $usergroup->group->name }}</td>
 			          <td>{{ $usergroup->created_at }}</td>
 			          <td>{{ $usergroup->updated_at }}</td>			          

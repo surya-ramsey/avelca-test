@@ -16,6 +16,11 @@ Route::get('/', function()
     return Redirect::to('users');
 });
 
+Route::get('usergroups/getuseremail/{$term}',function(){
+	$suggestion = User::select('email')->where('email','LIKE','%'.$term.'%')->get();
+	return Response::json($suggestion);
+});
+
 Route::resource('users','UsersController');
 Route::resource('debits','DebitsController');
 Route::resource('groups','GroupsController');
@@ -26,6 +31,7 @@ Route::resource('throttles','ThrottlesController');
 Route::resource('transactions','TransactionsController');
 Route::resource('types','TypesController');
 Route::resource('usergroups','UserGroupsController');
+Route::post('usergroups/senduser','UserGroupsController@senduser');
 
 //Route::get('/', array('as' => 'home', function () { }));
 Route::get('login', array('as' => 'login', function () { }));

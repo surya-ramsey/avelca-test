@@ -2,36 +2,21 @@
 
 @section('content')
 
-<h1>Edit User</h1>
-{{ Form::model($user, array('method' => 'PATCH', 'route' => array('users.update', $user->id))) }}
+<h1>Create User</h1>
+<div class="form-group">
+{{ Form::model( $usergroup, array('method' => 'PATCH', 'route' => array('usergroups.update', '$usergroup->id') )) }}
     <ul class="list-unstyled">
         <li>
-            {{ Form::label('email', 'Email:') }}
-            {{ Form::text('email') }}
-        </li>
+                {{ Form::label('user_id', 'User:',array('class'=>'control-label')) }}
+                {{ Form::text('user_id',$usergroup->user->email, array('class'=>'form-control', 'id'=>'select' ,'data-autocomplete'=>true, 'enable'=>false)) }}             
+            </li>
+            <li>
+                {{ Form::label('group_id', 'Group:',array('class'=>'control-label')) }}
+                {{ Form::select('group_id', $group_options, Input::old('groups'), array('class'=>'form-control')) }}
+            </li>
         <li>
-            {{ Form::label('password', 'Password:') }}
-            {{ Form::text('password') }}
-        </li>
-        <li>
-            {{ Form::label('permission', 'Permission:') }}
-            {{ Form::text('permission') }}
-        </li>
-        <li>
-            {{ Form::label('activated', 'Activated:') }}
-            {{ Form::checkbox('activated','true',true) }}
-        </li>
-        <li>
-            {{ Form::label('first_name', 'First Name:') }}
-            {{ Form::text('first_name') }}
-        </li>
-        <li>
-            {{ Form::label('last_name', 'Last Name:') }}
-            {{ Form::text('last_name') }}
-        </li>
-        <li>
-            {{ Form::submit('Save', array('class' => 'btn btn-info')) }}            
-        </li>
+            {{ Form::submit('Save', array('class' => 'btn btn-info')) }}          
+        </li>       
     </ul>
 {{ Form::close() }}
 
@@ -40,5 +25,5 @@
         {{ implode('', $errors->all('<li class="error">:message</li>')) }}
     </ul>
 @endif
-
+</div>
 @stop

@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	{{ HTML::style('css/bootstrap.min.css')}}
 	{{ HTML::style('css/style.css')}}
+	{{ HTML::style('css/jquery-ui-1.10.4.css')}}
 </head>
 	<body>
 		<div class="container">
@@ -22,8 +23,12 @@
 				@include('includes.footer')
 			</footer>
 
-		</div>
+		</div>		
 
 		{{ HTML::script('js/bootstrap.min.js')}}		
+		{{ HTML::script('js/jquery-1.10.2.js')}}
+		{{ HTML::script('js/jquery-ui-1.10.4.js')}}
+		{{ HTML::script('js/application.js')}}
+
 	</body>
 </html>
